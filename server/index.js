@@ -2,6 +2,12 @@ console.log('test');
 const fs = require('fs');
 const path = require('path');
 
+function isExist(element, index, array) {
+  if (index === this) {
+    return true;
+  }
+  return false;
+}
 function getAllProducts(file) {
   try {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -13,11 +19,7 @@ function getAllProducts(file) {
 function getByID(file, id) {
   try {
     const productsList = JSON.parse(fs.readFileSync(file, 'utf8'));
-    for (let i = 0; i < productsList.length; i++) {
-      if (productsList[i].id === id) {
-        return productsList[i];
-      }
-    }
+    return productsList.find(isExist, id);
   } catch (err) {
     console.log(err);
   }
@@ -52,12 +54,9 @@ function updateProducts(file, newProdName, newProdPrice, newProdQuan, id) {
       product_amount: newProdQuan,
     };
     const productsList = JSON.parse(fs.readFileSync(file, 'utf8'));
-    for (let i = 0; i < productsList.length; i++) {
-      if (productsList[i].id === id) {
-        productsList[i] = newProd;
-        break;
-      }
-    }
+
+    productsList.findIndex(isExist, id);
+    productsList[id] = newProd;
     fs.writeFileSync(file, JSON.stringify(productsList), (err) => {
       if (err) {
         console.error(err);
@@ -71,12 +70,8 @@ function updateProducts(file, newProdName, newProdPrice, newProdQuan, id) {
 function deleteProducts(file, id) {
   try {
     const productsList = JSON.parse(fs.readFileSync(file, 'utf8'));
-    for (let i = 0; i < productsList.length; i++) {
-      if (productsList[i].id === id) {
-        productsList.splice(i, 1);
-        break;
-      }
-    }
+    productsList.findIndex(isExist, id);
+    productsList.splice(id, 1);
     fs.writeFileSync(file, JSON.stringify(productsList), (err) => {
       if (err) {
         console.error(err);
