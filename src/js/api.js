@@ -2,10 +2,10 @@ import 'regenerator-runtime/runtime';
 import { countTotal, setResultTotal } from './productsFunctions';
 import { getAllProducts, deleteProduct, addProduct, editProduct } from './fetchFunctions';
 
-let resultTotal = 0;
 
-let productsList;
 window.onload = function upload() {
+  let resultTotal = 0;
+  let productsList;
   async function updateUI() {
     productsList = await getAllProducts();
     productsList.forEach((element) => {
