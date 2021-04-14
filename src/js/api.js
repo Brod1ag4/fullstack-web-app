@@ -4,14 +4,15 @@ import { getAllProducts, deleteProduct, addProduct, editProduct } from './fetchF
 
 
 window.onload = function upload() {
-  let resultTotal = 0;
-  let productsList;
+  
+  
   async function updateUI() {
+    const productsList;
     productsList = await getAllProducts();
     productsList.forEach((element) => {
       element.priceTotal = countTotal(element);
     });
-
+    const resultTotal = 0;
     resultTotal = setResultTotal(productsList);
     const source = document.getElementById('store-template').innerHTML;
     const template = Handlebars.compile(source);
